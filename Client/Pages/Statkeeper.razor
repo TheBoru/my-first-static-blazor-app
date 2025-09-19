@@ -1,8 +1,42 @@
 ﻿@page "/statkeeper"
-<h3>Stat Keeper</h3>
+@using Syncfusion.Blazor.Buttons
 
-<Timer />
+<MatchTimer @ref="MatchTimer"/>
+<SfButton Content="Start" OnClick="@StartTimer"/>
+<SfButton Content="Stop" OnClick="@StopTimer" />
+<SfButton Content="Pause" OnClick="@PauseTimer" />
 
-@code {
+@code
+{
+    private MatchTimer MatchTimer;
+    private bool isrunning = false;
+    private bool ispaused = false;
+    public void StartTimer(MouseEventArgs e)
+    {
+        MatchTimer.Start();
+        isrunning = true;
+        ispaused = false;
+    }
+
+    public void StopTimer(MouseEventArgs e)
+    {
+        MatchTimer.Stop();
+        isrunning = true;
+    }
+
+    public void PauseTimer(MouseEventArgs e)
+    {
+        if(isrunning is false && ispaused is true)
+        {
+            MatchTimer.Restart(); 
+        }
+
+        if (isrunning is true && ispaused is false)
+        {
+            MatchTimer.Pause();
+            isrunning = false;
+            ispaused = true;
+        }
+    }
 
 }

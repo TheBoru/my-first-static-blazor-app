@@ -1,21 +1,18 @@
-﻿@page "/timer"
-
+﻿
 @inject RecurringOperationsManager Recurop
 
 <PageTitle>Score keeper</PageTitle>
 
-<div style="margin-top:55px; text-align:center">
+<div style="margin-top:10px; text-align:center">
     <div>
-        <p style="visibility: @(_timerVisible ? "visible" : "hidden"); font-size: 75px;">@_displayTime</p>
+        <p style="visibility: @(_timerVisible ? "visible" : "hidden"); font-size: 35px;">@_displayTime</p>
     </div>
-    <div style="padding-top:20px">
+    <div style="padding-top:10px">
         <button class="btn btn-sm btn-primary" disabled=@(_timerOperation.CanBeStarted ? false : true) @onclick="StartTimer">Start</button>
         <button class="btn btn-sm btn-primary" disabled=@(_timerOperation.IsRecurring ? false : true) @onclick="PauseTimer">Pause</button>
         <button class="btn btn-sm btn-primary" disabled=@(_timerOperation.IsPaused ? false : true) @onclick="ResumeTimer">Resume</button>
         <button class="btn btn-sm btn-danger" disabled=@(_timerOperation.IsRecurring ? false : true) @onclick="StopTimer">Stop</button>
-
     </div>
-
 </div>
 
 @code {
@@ -24,6 +21,7 @@
     TimeSpan _displayTime = default;
     int _elapsedSeconds;
     bool _timerVisible = true;
+
 
     protected override void OnInitialized()
     {
@@ -36,11 +34,11 @@
         _blinkerOperation.Operation = BlinkTimer;
         _blinkerOperation.StatusChanged += BlinkerOperationStatusChanged;
 
-
     }
 
     void StartTimer()
     {
+        Recurop.CancelRecurring(_timerOperation);
         Recurop.StartRecurring(_timerOperation, TimeSpan.FromSeconds(1));
     }
 
@@ -73,8 +71,6 @@
         _timerVisible = !_timerVisible;
         StateHasChanged();
     }
-
-
 
     void BlinkerOperationStatusChanged()
     {

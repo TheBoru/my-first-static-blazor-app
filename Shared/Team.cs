@@ -7,14 +7,14 @@ namespace BlazorApp.Shared
     public class Team
     {
         public string Name { get; set; }
-        public List<Player> Players { get; set; }
+        public List<Player> PlayerList { get; set; }
         public int TotalPointsScored
         {
             get
             {
                 int totalpointsscored = 0;
 
-                foreach (var player in Players)
+                foreach (var player in PlayerList)
                 {
                     totalpointsscored = totalpointsscored + player.TotalPointScored;
                 }
@@ -29,7 +29,7 @@ namespace BlazorApp.Shared
             {
                 int goalsscored = 0;
 
-                foreach (var player in Players)
+                foreach (var player in PlayerList)
                 {
                     goalsscored = goalsscored + player.GoalsScored;
                 }
@@ -44,7 +44,7 @@ namespace BlazorApp.Shared
             {
                 int pointsscored = 0;
 
-                foreach (var player in Players)
+                foreach (var player in PlayerList )
                 {
                     pointsscored = pointsscored + player.GoalsScored;
                 }
