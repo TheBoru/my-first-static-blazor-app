@@ -346,3 +346,4 @@ healthchecksdb
 /.github/workflows/my-first-static-blazor-app.yml
 
 .env
+/Client/staticwebapp.config.json
