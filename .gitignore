@@ -344,3 +344,5 @@ healthchecksdb
 /playwright-report/
 /playwright/.cache/
 /.github/workflows/my-first-static-blazor-app.yml
+
+.env
